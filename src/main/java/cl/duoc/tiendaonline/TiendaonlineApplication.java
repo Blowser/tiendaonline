@@ -69,32 +69,25 @@ public class TiendaonlineApplication {
 // JavaScript
 // =====================================================
 
-// ARQUITECTURA DE EJECUCIÓN
-// Cliente / Postman
-// ↓
-// Controller
-// ↓
-// Service
-// ↓
-// Repository
-// ↓
-// Oracle
-// =====================================================
 
-// ARQUITECTURA DE DATOS
-//
-// JSON
-// ↓
-// DTO
-// ↓
-// Entity
-// ↓
-// Oracle
-//
-// Oracle
-// ↓
-// Entity
-// ↓
-// DTO
-// ↓
-// JSON
+
+
+// Contexto
+//Desarrollamos un e-commerce llamado RotomTech utilizando Spring Boot y Oracle.
+
+//El sistema permite gestionar usuarios y productos mediante operaciones CRUD.
+
+//La arquitectura está separada en capas para facilitar el mantenimiento y la escalabilidad del proyecto.
+
+
+
+// FLUJO DE EJECUCIÓN
+//POV CLIENTE:
+//Cliente (Postman) -> Controller -> Service -> Repository -> Oracle DBA 
+
+//POV APP: 
+//Oracle DBA -> Repository -> Service -> Controller -> JSON -> Cliente	
+
+//POV ERROR:
+//Cliente->JSON->DTO + Validaciones->Error->GlobalExceptionHandler->JSON Error->Cliente
+
