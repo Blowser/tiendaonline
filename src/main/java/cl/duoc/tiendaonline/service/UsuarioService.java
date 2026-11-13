@@ -314,15 +314,21 @@ public UsuarioDTO eliminar(Long id) {
 
     repository.deleteById(id);
 
-return toDTO(usuario);
-    }
+        return toDTO(usuario);
+        }
     
+
+
+public Usuario login(String correo, String password) {
+
+    return repository
+            .findByCorreoAndPassword(correo, password)
+            .orElseThrow(() ->
+                    new RuntimeException("Credenciales inválidas"));
+
+        }
+        
 }
-
-
-
-
-
 
 
   
