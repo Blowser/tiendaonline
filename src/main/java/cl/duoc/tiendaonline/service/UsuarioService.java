@@ -321,14 +321,15 @@ private UsuarioResponseDTO toDTO(
 
         // 4.6. LOGIN DE USUARIO
         // Busca un usuario existente utilizando su correo y contraseña.
-public Usuario login(String correo, String password) {
+        public UsuarioResponseDTO login(String correo, String password) {
 
-    return repository
-            .findByCorreoAndPassword(correo, password)
-            .orElseThrow(() ->
-                    new RuntimeException("Credenciales inválidas"));
+        Usuario usuario = repository
+                .findByCorreoAndPassword(correo, password)
+                .orElseThrow(() ->
+                        new RuntimeException("Credenciales inválidas"));
 
-        }
+        return toDTO(usuario);
+                }
         
 }
 
