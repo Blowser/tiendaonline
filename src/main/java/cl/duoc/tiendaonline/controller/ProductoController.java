@@ -13,9 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import cl.duoc.tiendaonline.dto.ProductoDTO;
+
 import cl.duoc.tiendaonline.service.ProductoService;
 import jakarta.validation.Valid;
+
+
+
+
 
 @RestController
 @RequestMapping("/productos")
@@ -106,4 +112,7 @@ public class ProductoController {
                 .notFound()
                 .build();
     }
+
+
+
 }
