@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.duoc.tiendaonline.dto.LoginRequestDTO;
 import cl.duoc.tiendaonline.dto.UsuarioDTO;
+import cl.duoc.tiendaonline.entity.Usuario;
 import cl.duoc.tiendaonline.service.UsuarioService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -187,6 +189,16 @@ public class UsuarioController {
     }
 
 
+        @PostMapping("/login")
+        public ResponseEntity<Usuario> login(
+                @RequestBody LoginRequestDTO request) {
+
+        Usuario usuario = service.login(
+                request.getCorreo(),
+                request.getPassword());
+
+        return ResponseEntity.ok(usuario);
+        }
 
 
 }
