@@ -22,7 +22,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import cl.duoc.tiendaonline.dto.UsuarioDTO;
+import cl.duoc.tiendaonline.dto.UsuarioRequestDTO;
+import cl.duoc.tiendaonline.dto.UsuarioResponseDTO;
 import cl.duoc.tiendaonline.entity.Usuario;
 import cl.duoc.tiendaonline.repository.UsuarioRepository;
 
@@ -89,25 +90,25 @@ public class UsuarioService {
         // Entity
         // ↓
         // DTO
-        private UsuarioDTO toDTO(
-                Usuario usuario) {
+private UsuarioResponseDTO toDTO(
+        Usuario usuario) {
 
-        UsuarioDTO dto =
-                new UsuarioDTO();
+    UsuarioResponseDTO dto =
+            new UsuarioResponseDTO();
 
-        dto.setNombre(
-                usuario.getNombre());
+    dto.setId(
+            usuario.getId());
 
-        dto.setCorreo(
-                usuario.getCorreo());
+    dto.setNombre(
+            usuario.getNombre());
 
-        dto.setPassword(
-                usuario.getPassword());
+    dto.setCorreo(
+            usuario.getCorreo());
 
-        dto.setRol(
-                usuario.getRol());
+    dto.setRol(
+            usuario.getRol());
 
-        return dto;
+    return dto;
         }
 
         // DTO REFACTORIZADO
@@ -119,7 +120,7 @@ public class UsuarioService {
         // ↓
         // Entity
         private Usuario toEntity(
-                UsuarioDTO dto) {
+                UsuarioRequestDTO dto) {
 
         Usuario usuario =
                 new Usuario();
@@ -162,16 +163,16 @@ public class UsuarioService {
     // Repository
     // ↓
     // Oracle
-public UsuarioDTO crear(
-        UsuarioDTO request) {
+        public UsuarioResponseDTO crear(
+                UsuarioRequestDTO request) {
 
-    Usuario usuario =
-            toEntity(request);
+        Usuario usuario =
+                toEntity(request);
 
-    Usuario guardado =
-            repository.save(usuario);
+        Usuario guardado =
+                repository.save(usuario);
 
-    return toDTO(guardado);
+        return toDTO(guardado);
         }
        
     // 4.3.1 OBTENER TODOS LOS USUARIOS (GET)
@@ -188,22 +189,22 @@ public UsuarioDTO crear(
     // DTO
     // ↓
     // API
-public List<UsuarioDTO> obtenerTodos() {
+        public List<UsuarioResponseDTO> obtenerTodos() {
 
-    List<Usuario> usuarios =
-            repository.findAll();
+        List<Usuario> usuarios =
+                repository.findAll();
 
-    List<UsuarioDTO> respuesta =
-            new ArrayList<>();
+        List<UsuarioResponseDTO> respuesta =
+                new ArrayList<>();
 
-    for (Usuario usuario : usuarios) {
+        for (Usuario usuario : usuarios) {
 
-        respuesta.add(
-                toDTO(usuario));
-    }
+                respuesta.add(
+                        toDTO(usuario));
+        }
 
-    return respuesta;
-        }    
+        return respuesta;
+        }
 
     // 4.3.2 OBTENER USUARIO POR ID (GET)
     //
@@ -219,18 +220,18 @@ public List<UsuarioDTO> obtenerTodos() {
     //
     // Más adelante reemplazaremos este null
     // por una excepción personalizada.
-public UsuarioDTO obtenerPorId(
-        Long id) {
+        public UsuarioResponseDTO obtenerPorId(
+                Long id) {
 
-    Usuario usuario =
-            repository.findById(id)
-            .orElse(null);
+        Usuario usuario =
+                repository.findById(id)
+                .orElse(null);
 
-    if(usuario == null){
-        return null;
-    }
+        if (usuario == null) {
+                return null;
+        }
 
-    return toDTO(usuario);
+        return toDTO(usuario);
         }
 
     // 4.4. ACTUALIZAR USUARIO (PUT)
@@ -254,34 +255,32 @@ public UsuarioDTO obtenerPorId(
     // Entity actualizada
     // ↓
     // DTO
-public UsuarioDTO actualizar(
-        Long id,
-        UsuarioDTO request) {
+        public UsuarioResponseDTO actualizar(
+                Long id,
+                UsuarioRequestDTO request) {
 
-    Usuario usuario = repository.findById(id)
-            .orElse(null);
+        Usuario usuario =
+                repository.findById(id)
+                .orElse(null);
 
-    if (usuario == null) {
-        return null;
-    }
+        if (usuario == null) {
+                return null;
+        }
 
-    // DTO → Entity
+        usuario.setNombre(
+                request.getNombre());
 
-    usuario.setNombre(
-            request.getNombre());
+        usuario.setCorreo(
+                request.getCorreo());
 
-    usuario.setCorreo(
-            request.getCorreo());
+        usuario.setPassword(
+                request.getPassword());
 
-    usuario.setPassword(
-            request.getPassword());
+        usuario.setRol(
+                request.getRol());
 
-    usuario.setRol(
-            request.getRol());
-
-    return toDTO(
-        repository.save(usuario));
-        
+        return toDTO(
+                repository.save(usuario));
         }
 
 
@@ -303,22 +302,25 @@ public UsuarioDTO actualizar(
     // ↓
     // Oracle
     //
-public UsuarioDTO eliminar(Long id) {
+        public UsuarioResponseDTO eliminar(
+                Long id) {
 
-    Usuario usuario = repository.findById(id)
-            .orElse(null);
+        Usuario usuario =
+                repository.findById(id)
+                .orElse(null);
 
-    if (usuario == null) {
-        return null;
-    }
+        if (usuario == null) {
+                return null;
+        }
 
-    repository.deleteById(id);
+        repository.deleteById(id);
 
         return toDTO(usuario);
         }
     
 
-
+        // 4.6. LOGIN DE USUARIO
+        // Busca un usuario existente utilizando su correo y contraseña.
 public Usuario login(String correo, String password) {
 
     return repository
