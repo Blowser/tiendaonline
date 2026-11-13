@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.duoc.tiendaonline.dto.LoginRequestDTO;
-import cl.duoc.tiendaonline.dto.UsuarioDTO;
+import cl.duoc.tiendaonline.dto.UsuarioRequestDTO;
+import cl.duoc.tiendaonline.dto.UsuarioResponseDTO;
 import cl.duoc.tiendaonline.entity.Usuario;
 import cl.duoc.tiendaonline.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -74,17 +75,18 @@ public class UsuarioController {
     // en un objeto UsuarioDTO.
     // @Valid ejecuta las validaciones definidas en UsuarioDTO
     // antes de llamar al Service.
-    @PostMapping
-    public ResponseEntity<UsuarioDTO> crearUsuario(
-            @Valid @RequestBody UsuarioDTO request) {
+        @PostMapping
+        public ResponseEntity<UsuarioResponseDTO> crearUsuario(
+                @Valid @RequestBody UsuarioRequestDTO request) {
 
-        UsuarioDTO nuevoUsuario =
+        UsuarioResponseDTO nuevoUsuario =
                 service.crear(request);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(nuevoUsuario);
-    }
+        }
+
 
     // OBTENER TODOS LOS USUARIOS (GET)
     // @GetMapping asocia este método a solicitudes HTTP GET.
@@ -93,15 +95,15 @@ public class UsuarioController {
     // El Controller solicita los datos al Service
     // y devuelve una respuesta HTTP 200 OK con la lista
     // de usuarios obtenida desde Oracle.
-    @GetMapping
-    public ResponseEntity<List<UsuarioDTO>>
-    obtenerTodos() {
+        @GetMapping
+        public ResponseEntity<List<UsuarioResponseDTO>>
+        obtenerTodos() {
 
-        List<UsuarioDTO> usuarios =
+        List<UsuarioResponseDTO> usuarios =
                 service.obtenerTodos();
 
         return ResponseEntity.ok(usuarios);
-    }
+        }
 
 
     // OBTENER USUARIO POR ID (GET)
@@ -114,20 +116,20 @@ public class UsuarioController {
     // devuelve HTTP 200 OK.
     // Si no existe:
     // devuelve HTTP 404 Not Found.
-    @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> obtenerPorId(
-            @PathVariable Long id) {
+        @GetMapping("/{id}")
+        public ResponseEntity<UsuarioResponseDTO> obtenerPorId(
+                @PathVariable Long id) {
 
-        UsuarioDTO usuario =
+        UsuarioResponseDTO usuario =
                 service.obtenerPorId(id);
 
         if (usuario != null) {
 
-            return ResponseEntity.ok(usuario);
+                return ResponseEntity.ok(usuario);
         }
 
         return ResponseEntity.notFound().build();
-    }    
+        }
 
 
 
@@ -141,22 +143,22 @@ public class UsuarioController {
     // Ejemplo:
     // PUT /usuarios/1
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> actualizarUsuario(
-            @PathVariable Long id,
-            @Valid @RequestBody UsuarioDTO request) {
+        @PutMapping("/{id}")
+        public ResponseEntity<UsuarioResponseDTO> actualizarUsuario(
+                @PathVariable Long id,
+                @Valid @RequestBody UsuarioRequestDTO request) {
 
-        UsuarioDTO usuarioActualizado =
+        UsuarioResponseDTO usuarioActualizado =
                 service.actualizar(id, request);
 
         if (usuarioActualizado != null) {
 
-            return ResponseEntity.ok(
-                    usuarioActualizado);
+                return ResponseEntity.ok(
+                        usuarioActualizado);
         }
 
         return ResponseEntity.notFound().build();
-    }
+        }
 
     // ELIMINAR USUARIO (DELETE)
     // @DeleteMapping asocia este método
@@ -169,33 +171,34 @@ public class UsuarioController {
     // devuelve HTTP 204 No Content.
     // Si el usuario no existe:
     // devuelve HTTP 404 Not Found.
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarUsuario(
-            @PathVariable Long id) {
+        @DeleteMapping("/{id}")
+        public ResponseEntity<Void> eliminarUsuario(
+                @PathVariable Long id) {
 
-        UsuarioDTO usuario =
+        UsuarioResponseDTO usuario =
                 service.eliminar(id);
 
         if (usuario != null) {
 
-            return ResponseEntity
-                    .noContent()
-                    .build();
+                return ResponseEntity
+                        .noContent()
+                        .build();
         }
 
         return ResponseEntity
                 .notFound()
                 .build();
-    }
+        }
 
 
         @PostMapping("/login")
         public ResponseEntity<Usuario> login(
                 @RequestBody LoginRequestDTO request) {
 
-        Usuario usuario = service.login(
-                request.getCorreo(),
-                request.getPassword());
+        Usuario usuario =
+                service.login(
+                        request.getCorreo(),
+                        request.getPassword());
 
         return ResponseEntity.ok(usuario);
         }
