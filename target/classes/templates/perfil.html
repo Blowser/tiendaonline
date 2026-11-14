@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -12,7 +11,6 @@
 
     <link rel="stylesheet"
           href="/css/rotomtech.css">
-
 </head>
 
 <body>
@@ -31,6 +29,10 @@
             <h2 id="tituloBienvenida">
                 Bienvenido
             </h2>
+
+            <p id="subtituloPerfil">
+                Centro de Usuario
+            </p>
 
         </div>
 
@@ -73,7 +75,7 @@
                 Gestionar Productos
             </button>
 
-            <br><br>
+            <br>
 
             <button class="btn-rotom">
                 Gestionar Usuarios
@@ -81,59 +83,21 @@
 
         </div>
 
+        <br>
+
+        <button
+            id="btnLogout"
+            class="btn-rotom">
+
+            Cerrar Sesión
+
+        </button>
+
     </div>
 
 </div>
 
-<script>
-
-const usuario =
-    JSON.parse(
-        localStorage.getItem(
-            "usuario"));
-
-if(!usuario){
-
-    window.location.href =
-        "/login";
-
-}
-
-document
-    .getElementById(
-        "tituloBienvenida")
-    .innerText =
-    "Bienvenido "
-    + usuario.nombre;
-
-document
-    .getElementById(
-        "nombre")
-    .innerText =
-    usuario.nombre;
-
-document
-    .getElementById(
-        "correo")
-    .innerText =
-    usuario.correo;
-
-document
-    .getElementById(
-        "rol")
-    .innerText =
-    usuario.rol;
-
-if(usuario.rol !== "ADMIN"){
-
-    document
-        .getElementById(
-            "panelAdmin")
-        .style.display =
-        "none";
-}
-
-</script>
+<script src="/js/perfil.js"></script>
 
 </body>
 </html>
