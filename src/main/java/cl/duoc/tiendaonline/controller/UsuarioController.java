@@ -2,7 +2,6 @@ package cl.duoc.tiendaonline.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -203,23 +202,6 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
         }
 
-
-        @Controller
-        public class VistaController {
-
-        @GetMapping("/login")
-        public String login() {
-
-                return "login";
-        }
-        }
-
-
-        @GetMapping("/perfil")
-        public String perfil() {
-
-        return "perfil";
-        }
 }
 
 
