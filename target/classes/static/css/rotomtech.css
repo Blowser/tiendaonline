@@ -84,6 +84,34 @@ body {
 
     max-width: 500px;
 }
+/*TAMAÑO DEL LOGO*/
+.logo-rotom {
+
+    width: 160px;
+
+    height: auto;
+
+    display: block;
+
+    margin: 0 auto 20px auto;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(55,214,255,0.7)
+        )
+        drop-shadow(
+            0 0 25px
+            rgba(255,106,0,0.4)
+        );
+
+    transition: 0.3s ease;
+}
+
+.logo-rotom:hover {
+
+    transform: scale(1.05);
+}
 
 /* ========================================
    CARD
