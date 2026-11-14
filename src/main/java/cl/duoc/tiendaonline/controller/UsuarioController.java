@@ -213,6 +213,13 @@ public class UsuarioController {
                 return "login";
         }
         }
+
+
+        @GetMapping("/perfil")
+        public String perfil() {
+
+        return "perfil";
+        }
 }
 
 
