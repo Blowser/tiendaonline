@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>RotomTech | Mi Perfil</title>
+
+    <link rel="stylesheet"
+          href="/css/rotomtech.css">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="logo-area">
+
+            <img
+                src="/img/rotomtech-logo.jpg"
+                alt="RotomTech Logo"
+                class="logo-rotom">
+
+            <h2 id="tituloBienvenida">
+                Bienvenido
+            </h2>
+
+        </div>
+
+        <div class="card-rotom">
+
+            <p>
+                <strong>Nombre:</strong>
+                <span id="nombre"></span>
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Correo:</strong>
+                <span id="correo"></span>
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Rol:</strong>
+                <span id="rol"></span>
+            </p>
+
+        </div>
+
+        <br>
+
+        <div
+            id="panelAdmin"
+            class="card-rotom">
+
+            <h3>
+                ⚡ Panel Administración
+            </h3>
+
+            <br>
+
+            <button class="btn-rotom">
+                Gestionar Productos
+            </button>
+
+            <br><br>
+
+            <button class="btn-rotom">
+                Gestionar Usuarios
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const usuario =
+    JSON.parse(
+        localStorage.getItem(
+            "usuario"));
+
+if(!usuario){
+
+    window.location.href =
+        "/login";
+
+}
+
+document
+    .getElementById(
+        "tituloBienvenida")
+    .innerText =
+    "Bienvenido "
+    + usuario.nombre;
+
+document
+    .getElementById(
+        "nombre")
+    .innerText =
+    usuario.nombre;
+
+document
+    .getElementById(
+        "correo")
+    .innerText =
+    usuario.correo;
+
+document
+    .getElementById(
+        "rol")
+    .innerText =
+    usuario.rol;
+
+if(usuario.rol !== "ADMIN"){
+
+    document
+        .getElementById(
+            "panelAdmin")
+        .style.display =
+        "none";
+}
+
+</script>
+
+</body>
+</html>
