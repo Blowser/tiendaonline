@@ -107,15 +107,14 @@ document
 
     if(response.ok){
 
-        const usuario =
-            await response.json();
+    const usuario =
+        await response.json();
 
-        mensaje.innerText =
-            "Bienvenido "
-            + usuario.nombre
-            + " (" + usuario.rol + ")";
+    mensaje.innerText =
+        "Bienvenido "
+        + usuario.nombre
+        + " (" + usuario.rol + ")";
 
-        console.log(usuario);
 
     } else {
 
