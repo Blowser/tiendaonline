@@ -105,15 +105,19 @@ document
     const mensaje =
         document.getElementById("mensaje");
 
-    if(response.ok){
+        if(response.ok){
 
-    const usuario =
-        await response.json();
+        const usuario =
+            await response.json();
 
-    mensaje.innerText =
-        "Bienvenido "
-        + usuario.nombre
-        + " (" + usuario.rol + ")";
+        localStorage.setItem(
+            "usuario",
+            JSON.stringify(usuario)
+        );
+
+        window.location.href =
+            "/perfil";
+    
 
 
     } else {
