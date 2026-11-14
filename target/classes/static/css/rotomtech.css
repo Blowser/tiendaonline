@@ -218,3 +218,43 @@ body {
 /* ========================================
    BUTTONS
    ======================================== */
+   .btn-login,
+.btn-rotom {
+
+    width: 100%;
+
+    border: none;
+
+    cursor: pointer;
+
+    border-radius: 12px;
+
+    padding: 14px;
+
+    margin-top: 10px;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--rotom-orange),
+            var(--rotom-blue)
+        );
+
+    transition: 0.3s;
+}
+
+.btn-login:hover,
+.btn-rotom:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 20px
+        rgba(55,214,255,0.45);
+}
