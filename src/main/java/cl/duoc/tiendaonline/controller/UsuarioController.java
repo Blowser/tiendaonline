@@ -17,13 +17,14 @@ import cl.duoc.tiendaonline.dto.UsuarioResponseDTO;
 import cl.duoc.tiendaonline.service.UsuarioService;
 import jakarta.validation.Valid;
 import java.util.List;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 // El Controller representa la capa de presentación
 // de la API y actúa como punto de entrada de las solicitudes.
 
 // @RestController indica que esta clase puede recibir
 // solicitudes HTTP (GET, POST, PUT y DELETE)
 // y devolver respuestas HTTP.
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 
 // @RequestMapping define la ruta base de este Controller.
