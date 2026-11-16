@@ -23,7 +23,7 @@ public class UsuarioRequestDTO {
             message = "La contraseña debe tener entre 8 y 100 caracteres")
     private String password;
 
-    // ADMIN o USUARIO
+    // ADMIN o USUARIO. REVISARLO, QUIZÁS SE DEBERÍA QUITAR
     @NotBlank(message = "El rol es obligatorio")
     private String rol;
 
